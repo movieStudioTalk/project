@@ -1,0 +1,151 @@
+body {
+  margin: 0;
+  font-family: "Nanum Gothic", sans-serif;
+  background-color: #fffaf7;
+}
+
+.container {
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.hero-img {
+  width: 100%;
+  border-radius: 20px;
+  background-color: #ffe5ec;
+}
+
+.section {
+  margin-top: 40px;
+}
+
+h2,
+h3 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  font-weight: 800;
+  color: #3d2c2e;
+}
+
+.goods-grid {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.goods-card {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.goods-card img {
+  width: 80px;
+  height: 80px;
+}
+
+.goods-card.green {
+  background-color: #d3f6e6;
+  color: #007049;
+}
+
+.goods-card.yellow {
+  background-color: #fff2b2;
+  color: #b48b00;
+}
+
+.goods-card.blue {
+  background-color: #d8ecff;
+  color: #004e94;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: #ffe0eb;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.carousel-items {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+}
+
+.carousel-items img {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.arrow {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.review-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.review-box {
+  background-color: #e6f5ec;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: bold;
+  max-width: 100%;
+  font-size: 16px;
+}
+
+.product-card {
+  background-color: #fff0f0;
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.product-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.product-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+}
+
+.buy {
+  background-color: #ff6e7f;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}

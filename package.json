@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd client && npm run dev",
-    "client": "cd server && npm run dev"
+    "client": "cd server && npm run dev",
+    "build": "npm run build-client",
+    "build-client": "cd client && npm run build"
   }
 }
