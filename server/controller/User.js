@@ -2,7 +2,8 @@ const userModel = require("../model/user");
 const axios = require("axios");
 
 exports.postUserAdd = async (req, res) => {
-  const { user_id, user_pw, user_name, user_email, account_type } = req.body;
+  const { user_id, user_pw, user_name, user_phone, user_email, account_type } =
+    req.body;
   const create_ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
   try {
@@ -15,6 +16,7 @@ exports.postUserAdd = async (req, res) => {
       id: user_id,
       pw: user_pw,
       name: user_name,
+      phone: user_phone,
       type: account_type,
       email: user_email,
       ip: create_ip,

@@ -9,10 +9,10 @@ exports.findById = async (userid) => {
 };
 
 exports.insertUser = async (user) => {
-  const { id, pw, name, email, type, ip } = user;
+  const { id, pw, name, phone, email, type, ip } = user;
   const [result] = await db.query(
-    "INSERT INTO user_info (user_id, user_pw, user_name, user_email, account_type, create_date, create_ip) VALUES (?, ?, ?, ?, ?, NOW(), ?)",
-    [id, pw, name, email, type, ip]
+    "INSERT INTO user_info (user_id, user_pw, user_name, user_phone, user_email, account_type, create_date, create_ip) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)",
+    [id, pw, name, phone, email, type, ip]
   );
   return result;
 };

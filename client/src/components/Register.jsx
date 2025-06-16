@@ -7,6 +7,7 @@ const Register = () => {
     user_id: "",
     user_pw: "",
     confirm_pw: "",
+    user_phone: "",
     user_name: "",
     user_email: "",
     account_type: "home",
@@ -25,8 +26,32 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!formData.user_id.trim()) {
+      alert("아이디를 입력해주세요.");
+      return;
+    }
+    if (!formData.user_pw.trim()) {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
+    if (!formData.confirm_pw.trim()) {
+      alert("비밀번호 확인을 입력해주세요.");
+      return;
+    }
     if (formData.user_pw !== formData.confirm_pw) {
-      setMessage("비밀번호가 일치하지 않습니다.");
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+    if (!formData.user_phone.trim()) {
+      alert("휴대전화를 입력해주세요.");
+      return;
+    }
+    if (!formData.user_name.trim()) {
+      alert("이름을 입력해주세요.");
+      return;
+    }
+    if (!formData.user_email.trim()) {
+      alert("이메일을 입력해주세요.");
       return;
     }
 
@@ -34,6 +59,7 @@ const Register = () => {
       const res = await api.post("/user/userAdd", {
         user_id: formData.user_id,
         user_pw: formData.user_pw,
+        user_phone: formData.user_phone,
         user_name: formData.user_name,
         user_email: formData.user_email,
         account_type: formData.account_type,
@@ -81,6 +107,19 @@ const Register = () => {
           placeholder="비밀번호 확인"
           value={formData.confirm_pw}
           onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="user_phone"
+          placeholder="휴대전화"
+          value={formData.user_phone}
+          onChange={(e) => {
+            const onlyNums = e.target.value.replace(/[^0-9]/g, "").slice(0, 11);
+            setFormData({
+              ...formData,
+              user_phone: onlyNums,
+            });
+          }}
         />
         <input
           type="text"

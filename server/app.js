@@ -30,8 +30,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const login = require("./routes/user");
+const solapi = require("./routes/solapi");
 
 app.use("/user", login);
+app.use("/sms", solapi);
 
 app.listen(PORT, function () {
   console.log(`Sever Open: http://localhost:${PORT}`);
