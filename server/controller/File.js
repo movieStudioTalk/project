@@ -4,6 +4,7 @@ const fs = require("fs");
 const crypto = require("crypto");
 const axios = require("axios");
 
+//파일 생성
 exports.postFileAdd = async (req, res, formattedDate) => {
   const create_ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
   try {

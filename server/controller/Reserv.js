@@ -5,8 +5,7 @@ const axios = require("axios");
 exports.postReservAdd = async (req, res) => {
   const { title, price } = req.body;
   const create_ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-  console.log(req.body);
-  console.log(req.files);
+
   try {
     const now = new Date();
 
