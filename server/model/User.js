@@ -1,5 +1,6 @@
 const db = require("../config/db");
 
+//파라미터화된 쿼리를 사용해서 SQL INJECTION 방지했음
 exports.findById = async (userid) => {
   const [rows] = await db.query(
     "SELECT user_id FROM user_info WHERE user_id = ?",
