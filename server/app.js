@@ -30,9 +30,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const login = require("./routes/user");
+const reserv = require("./routes/reserv");
 const solapi = require("./routes/solapi");
 
 app.use("/user", login);
+app.use("/reserv", reserv);
 app.use("/sms", solapi);
 
 app.listen(PORT, function () {
