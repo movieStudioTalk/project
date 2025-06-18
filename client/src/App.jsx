@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
@@ -13,30 +12,30 @@ import { AuthProvider } from "./components/AuthContext";
 import KakaoSuccess from "./components/KakaoSuccess";
 
 function App() {
-  return (
-    <AuthProvider>
-      <Router>
-        <Header />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Hero />
-                <BestGoods />
-                <Features />
-                <Reviews />
-                <Footer />
-              </>
-            }
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/kakaoSuccess" element={<KakaoSuccess />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
-  );
+   return (
+      <AuthProvider>
+         <Router>
+            <Header />
+            <Routes>
+               <Route
+                  path="/"
+                  element={
+                     <>
+                        <Hero />
+                        <BestGoods />
+                        <Features />
+                        <Reviews />
+                        <Footer />
+                     </>
+                  }
+               />
+               <Route path="/login" element={<Login />} />
+               <Route path="/register" element={<Register />} />
+               <Route path="/kakaoSuccess" element={<KakaoSuccess />} />
+            </Routes>
+         </Router>
+      </AuthProvider>
+   );
 }
 
 export default App;
