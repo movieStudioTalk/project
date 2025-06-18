@@ -2,13 +2,26 @@
    position: fixed;
    top: 0;
    width: 100%;
-   background-color: #fff;
    display: flex;
    justify-content: space-between;
    align-items: center;
    padding: 1rem 2rem;
+
+   transition: background-color 0.3s ease, border-bottom 0.3s ease,
+      box-shadow 0.3s ease;
+   z-index: 1000;
+
+   /* 투명 상태: 배경 없음 + 하단 실선 */
+   background-color: transparent;
+   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+   box-shadow: none;
+}
+
+.navbar.solid {
+   /* 스크롤 후: 흰 배경 + 그림자 */
+   background-color: #fff;
+   border-bottom: none;
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-   z-index: 999;
 }
 
 .navbar__logo img {

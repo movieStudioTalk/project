@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [logName, setLogName] = useState("");
+  const [currentAlarm, setAlarm] = useState(false);
 
   const checkLogin = async () => {
     try {
@@ -24,13 +25,33 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const fetchAlarmStatus = async () => {
+    try {
+      const res = await api.get("/user/alarmStatus");
+      console.log(res);
+      setAlarm(res.data.isSuccess);
+    } catch (err) {
+      console.error("알림 상태 로드 실패:", err);
+    }
+  };
+
   useEffect(() => {
     checkLogin();
+    fetchAlarmStatus();
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn, setIsLoggedIn, logName, setLogName, checkLogin }}
+      value={{
+        isLoggedIn,
+        setIsLoggedIn,
+        logName,
+        setLogName,
+        checkLogin,
+        currentAlarm,
+        setAlarm,
+        fetchAlarmStatus,
+      }}
     >
       {children}
     </AuthContext.Provider>
