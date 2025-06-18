@@ -10,6 +10,7 @@ import TopButton from "./components/TopButton";
 import AllProducts from "./components/AllProducts";
 import products from "./js/products";
 import Login from "./components/Login";
+import CreateModal from "./components/CreateModal";
 import Register from "./components/Register";
 import { AuthProvider } from "./components/AuthContext";
 import KakaoSuccess from "./components/KakaoSuccess";
@@ -17,6 +18,7 @@ import KakaoSuccess from "./components/KakaoSuccess";
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAll, setShowAll] = useState(false); // ✅ 전체보기 토글 상태
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   return (
     <AuthProvider>
       <Router>
@@ -63,7 +65,12 @@ function App() {
                 <TopButton
                   isModalOpen={isModalOpen}
                   onToggleFilter={() => setShowAll((prev) => !prev)} // ✅ 토글 전달
+                  onOpenCreateModal={() => setIsCreateModalOpen(true)}
                 />
+
+                {isCreateModalOpen && (
+                  <CreateModal onClose={() => setIsCreateModalOpen(false)} />
+                )}
               </div>
             }
           />

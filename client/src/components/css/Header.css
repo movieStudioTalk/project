@@ -38,10 +38,9 @@
 /* 중앙 텍스트 + 버튼 */
 .center-text {
    position: absolute;
-   top: 50%;
+   top: 25%;
    left: 50%;
    transform: translate(-50%, -50%);
-   background-color: rgba(255, 255, 255, 0.5);
    text-align: center;
    padding: 20px;
    width: 100%;
@@ -55,17 +54,6 @@
 .center-text p {
    font-size: 1rem;
    margin-bottom: 1rem;
-}
-
-.cta-btn {
-   background: #ff3d3d;
-   color: white;
-   border: none;
-   padding: 12px 20px;
-   border-radius: 30px;
-   font-size: 1rem;
-   font-weight: bold;
-   cursor: pointer;
 }
 
 /* 페이지네이션 */
@@ -97,7 +85,8 @@
    .center-text {
       width: 600px;
       padding: 40px;
-      background-color: rgba(255, 255, 255, 0.6);
+      top: 28%;
+      left: 15%;
    }
 
    .center-text h1 {
@@ -108,11 +97,6 @@
    .center-text p {
       font-size: 1.3rem;
       margin-bottom: 1.5rem;
-   }
-
-   .cta-btn {
-      padding: 16px 28px;
-      font-size: 1.2rem;
    }
 
    .overlay {
