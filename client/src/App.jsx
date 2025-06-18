@@ -11,6 +11,7 @@ import AllProducts from "./components/AllProducts";
 // import products from "./js/products";
 import Login from "./components/Login";
 import CreateModal from "./components/CreateModal";
+import Modal from "./components/Modal";
 import Register from "./components/Register";
 import { AuthProvider } from "./components/AuthContext";
 import KakaoSuccess from "./components/KakaoSuccess";
@@ -21,6 +22,13 @@ function App() {
   const [showAll, setShowAll] = useState(false); // ✅ 전체보기 토글 상태
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [products, setProducts] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const openProductModal = (item) => {
+    setSelectedProduct(item);
+    setShowModal(true);
+  };
 
   useEffect(() => {
     card();
@@ -54,7 +62,7 @@ function App() {
                 <Header />
                 <div id="contents">
                   {showAll ? (
-                    <AllProducts setModalOpen={setIsModalOpen} />
+                    <AllProducts openProductModal={openProductModal} />
                   ) : (
                     <>
                       <Section
@@ -62,20 +70,20 @@ function App() {
                         items={products}
                         showRank={true}
                         sectionId="popular"
-                        setModalOpen={setIsModalOpen}
+                        openProductModal={openProductModal}
                       />
                       <Section
                         title="새로운 상품"
                         items={products}
                         sectionId="new"
-                        setModalOpen={setIsModalOpen}
+                        openProductModal={openProductModal}
                       />
                       <Section
                         title="단행본"
                         items={products}
                         sectionId="readBook"
                         showSpecial={true}
-                        setModalOpen={setIsModalOpen}
+                        openProductModal={openProductModal}
                       />
                     </>
                   )}
@@ -90,6 +98,16 @@ function App() {
 
                 {isCreateModalOpen && (
                   <CreateModal onClose={() => setIsCreateModalOpen(false)} />
+                )}
+
+                {showModal && selectedProduct && (
+                  <Modal
+                    product={selectedProduct}
+                    onClose={() => {
+                      setShowModal(false);
+                      setSelectedProduct(null);
+                    }}
+                  />
                 )}
               </div>
             }

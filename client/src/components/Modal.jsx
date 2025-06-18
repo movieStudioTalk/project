@@ -99,7 +99,7 @@ function Modal({ product, onClose }) {
                 onChange={handleChange}
                 readOnly
               />
-              <button type="button" onClick={zipCode}>
+              <button type="button" onClick={zipCode} className="zipButton">
                 주소검색
               </button>
             </div>

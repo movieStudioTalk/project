@@ -9,7 +9,7 @@
    display: flex;
    justify-content: center;
    align-items: center;
-   z-index: 999;
+   z-index: 1000;
 }
 
 .modal-container {
@@ -22,6 +22,12 @@
    width: 90%;
    padding: 20px;
    gap: 30px;
+   max-height: 90vh; /* ✅ 화면 높이의 90%까지만 표시 */
+   overflow-y: auto; /* ✅ 내용이 넘칠 경우 스크롤 */
+   -ms-overflow-style: none;
+}
+.modal-container::-webkit-scrollbar {
+   display: none;
 }
 
 .detailName {
@@ -37,6 +43,11 @@
 
 #buyButton {
    background-color: green;
+}
+
+.zipButton {
+   margin-left: 10px;
+   padding: 8px 12px !important;
 }
 
 /* ✅ PC 이상일 때: 가로 배치로 변경 */
@@ -118,7 +129,6 @@
    border-radius: 5px;
    cursor: pointer;
 }
-
 .close-button {
    position: absolute;
    top: 15px;

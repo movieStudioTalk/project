@@ -1,10 +1,10 @@
 // components/TopButton.js
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import { AuthContext } from "./AuthContext";
 import "./css/TopButton.css";
 
 function TopButton({
-  isModalOpen,
+  showModal,
   onToggleFilter,
   onOpenCreateModal,
   isCreateModalOpen,
@@ -12,6 +12,7 @@ function TopButton({
   const [isVisible, setIsVisible] = useState(false);
   const [showAll, setShowAll] = useState(true); // UI 텍스트 전용 상태
   const { isLoggedIn, logId } = useContext(AuthContext);
+  const didMountRef = useRef(false); // 최초 마운트 여부 체크용
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,12 +23,17 @@ function TopButton({
   }, []);
 
   const scrollToTop = () => {
-    if (!isModalOpen && !isCreateModalOpen) {
+    if (!showModal && !isCreateModalOpen) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
   useEffect(() => {
-    scrollToAllProducts();
+    if (didMountRef.current) {
+      // 마운트 후 showAll이 바뀔 때만 실행
+      scrollToAllProducts();
+    } else {
+      didMountRef.current = true; // 첫 렌더링 무시
+    }
   }, [showAll]);
 
   const scrollToAllProducts = () => {
@@ -51,8 +57,6 @@ function TopButton({
     onToggleFilter();
     scrollToAllProducts();
   };
-
-  if (isModalOpen || isCreateModalOpen) return null;
 
   return (
     isVisible && (

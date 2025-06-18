@@ -8,14 +8,21 @@ const KakaoLoginButton = () => {
   //운영
   const redirect_uri = "http://192.168.0.63:8080/user/kakaoLogin"; // 이 경로 중요
 
-  const kakaoLogin = () => {
-    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${client_id}&redirect_uri=${encodeURIComponent(
-      redirect_uri
-    )}`;
-    window.location.href = kakaoAuthUrl;
-  };
+   const kakaoLogin = () => {
+      const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${client_id}&redirect_uri=${encodeURIComponent(
+         redirect_uri
+      )}`;
+      window.location.href = kakaoAuthUrl;
+   };
 
-  return <img src={kakaoBtn} alt="카카오 로그인" onClick={kakaoLogin} />;
+   return (
+      <img
+         src={kakaoBtn}
+         alt="카카오 로그인"
+         onClick={kakaoLogin}
+         id="kakaoLogin"
+      />
+   );
 };
 
 export default KakaoLoginButton;
