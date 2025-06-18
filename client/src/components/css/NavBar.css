@@ -29,18 +29,23 @@
 
 .navbar__actions {
    display: flex;
-   align-items: center;
+   align-items: flex-end;
+   flex-direction: column-reverse;
+   gap: 7px;
 }
 
 .alarm-btn,
 .login-btn {
-   display: flex;
+   display: inline-flex;
    align-items: center;
-   margin-left: 1rem;
-   padding: 0.5rem 1rem;
+   justify-content: flex-end; /* 텍스트와 아이콘 우측 정렬 */
    border: none;
-   background-color: transparent;
    cursor: pointer;
+   font-weight: bold;
+   font-size: 1rem;
+   background-color: transparent;
+   white-space: nowrap;
+   width: fit-content;
 }
 
 .alarm-btn p,
@@ -53,9 +58,19 @@
 .loginIcon {
    width: 20px;
    height: 20px;
+   object-fit: contain;
+   flex-shrink: 0;
 }
 
 .user-name {
    margin-left: 1rem;
    font-weight: 500;
+}
+
+@media screen and (min-width: 1024px) {
+   .navbar__actions {
+      flex-direction: row;
+      justify-content: center;
+      gap: 20px;
+   }
 }
