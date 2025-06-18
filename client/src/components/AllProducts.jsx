@@ -7,7 +7,7 @@ function AllProducts({ items, setModalOpen }) {
    const itemsPerPage = 12;
    const pageCount = Math.ceil(items.length / itemsPerPage);
 
-   // 페이지네이션 범위 계산 (5페이지씩 표시)
+   // 페이지네이션 범위 계산 (5개씩 표시)
    const pagesToShow = 5;
    const half = Math.floor(pagesToShow / 2);
    let startPage = currentPage - half;
@@ -20,11 +20,13 @@ function AllProducts({ items, setModalOpen }) {
       endPage = pageCount;
       startPage = Math.max(1, pageCount - pagesToShow + 1);
    }
+   const visiblePages = [];
+   for (let p = startPage; p <= endPage; p++) visiblePages.push(p);
 
-   // 네비게이션 핸들러
-   const handlePageClick = (page) => setCurrentPage(page);
+   // 핸들러
    const handleFirst = () => setCurrentPage(1);
    const handlePrev = () => setCurrentPage((p) => Math.max(1, p - 1));
+   const handlePage = (p) => setCurrentPage(p);
    const handleNext = () => setCurrentPage((p) => Math.min(pageCount, p + 1));
    const handleLast = () => setCurrentPage(pageCount);
 
@@ -36,10 +38,17 @@ function AllProducts({ items, setModalOpen }) {
       <section className="all-products-section">
          <h2 className="all-products-title">상품 전체보기</h2>
 
+         {/* 검색창 UI */}
+         <div className="all-products-search">
+            <input type="text" placeholder="상품명으로 검색" />
+         </div>
+
+         {/* 상품 그리드 */}
          <div className="all-products-grid">
             {currentItems.map((item, idx) => (
                <div
                   key={item.id || idx}
+                  className="all-products-item"
                   onClick={() => setModalOpen(true, item)}
                >
                   <ProductCard item={item} index={idx} />
@@ -47,6 +56,7 @@ function AllProducts({ items, setModalOpen }) {
             ))}
          </div>
 
+         {/* 페이지네이션 */}
          {pageCount > 1 && (
             <div className="all-products-pagination">
                <button onClick={handleFirst} disabled={currentPage === 1}>
@@ -55,20 +65,15 @@ function AllProducts({ items, setModalOpen }) {
                <button onClick={handlePrev} disabled={currentPage === 1}>
                   이전
                </button>
-
-               {Array.from(
-                  { length: endPage - startPage + 1 },
-                  (_, i) => startPage + i
-               ).map((page) => (
+               {visiblePages.map((p) => (
                   <button
-                     key={page}
-                     className={page === currentPage ? "active" : ""}
-                     onClick={() => handlePageClick(page)}
+                     key={p}
+                     className={p === currentPage ? "active" : ""}
+                     onClick={() => handlePage(p)}
                   >
-                     {page}
+                     {p}
                   </button>
                ))}
-
                <button
                   onClick={handleNext}
                   disabled={currentPage === pageCount}

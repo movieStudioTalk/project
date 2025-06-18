@@ -1,29 +1,46 @@
 .all-products-section {
    max-width: 1200px;
-   width: 100%;
    margin: 0 auto;
    padding: 16px;
    margin-top: 7vh;
 }
 
 .all-products-title {
-   font-size: 30px;
+   font-size: 2rem;
    font-weight: bold;
    text-align: center;
-   margin-bottom: 20px;
+   margin-bottom: 1rem;
+}
+
+.all-products-search {
+   display: flex;
+   justify-content: center;
+   margin-bottom: 1rem;
+}
+
+.all-products-search input {
+   width: 100%;
+   max-width: 400px;
+   padding: 0.5rem 1rem;
+   border: 1px solid #ccc;
+   border-radius: 4px;
 }
 
 .all-products-grid {
    display: grid;
-   grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개 */
-   gap: 20px;
+   grid-template-columns: repeat(4, 1fr);
+   gap: 1rem;
 }
 
 @media screen and (max-width: 767px) {
    .all-products-grid {
-      grid-template-columns: repeat(2, 1fr); /* 모바일 2열 */
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
    }
+}
+
+.all-products-item {
+   cursor: pointer;
 }
 
 .all-products-pagination {
