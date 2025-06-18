@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Header from "./components/Header";
 import Section from "./components/Section";
+import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 import TopButton from "./components/TopButton";
 import AllProducts from "./components/AllProducts";
@@ -57,6 +58,7 @@ function App() {
                               </>
                            )}
                         </div>
+                        <FAQ />
                         <Footer />
                         <TopButton
                            isModalOpen={isModalOpen}
