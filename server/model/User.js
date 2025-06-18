@@ -52,3 +52,28 @@ exports.kakaoCreate = async (user) => {
   );
   return result;
 };
+
+exports.UserSubscribeCnt = async (userid) => {
+  const [rows] = await db.query(
+    "SELECT COUNT(*) FROM user_info WHERE user_id = ? AND subscribe_yn = 'Y'",
+    [userid]
+  );
+  return rows[0]["COUNT(*)"];
+};
+
+exports.findUserSubscribe = async (userid) => {
+  const [rows] = await db.query(
+    "SELECT subscribe_yn FROM user_info WHERE user_id = ?",
+    [userid]
+  );
+  return rows[0]["subscribe_yn"];
+};
+
+exports.updateUserSubscribe = async (user) => {
+  const { user_id, user_yn } = user;
+  const [result] = await db.query(
+    "UPDATE user_info SET subscribe_yn = ? WHERE user_id = ?",
+    [user_yn, user_id]
+  );
+  return result;
+};

@@ -85,7 +85,10 @@ exports.postKakaoLogin = async (req, res) => {
   }
 
   const client_id = "eff5a79672835d8e1007a61e5faecbd4";
-  const redirect_uri = "http://localhost:8080/user/kakaoLogin"; // 네 React 콜백 URI와 반드시 일치
+  //로컬
+  // const redirect_uri = "http://localhost:8080/user/kakaoLogin"; // 네 React 콜백 URI와 반드시 일치
+  //운영
+  const redirect_uri = "http://192.168.0.63:8080/user/kakaoLogin"; // 네 React 콜백 URI와 반드시 일치
 
   try {
     // 1️⃣ access_token 발급 요청
@@ -160,5 +163,44 @@ exports.postKakaoLogin = async (req, res) => {
     return res
       .status(500)
       .json({ isSuccess: false, msg: "카카오 로그인 실패" });
+  }
+};
+
+exports.checkAlarm = async (req, res) => {
+  const user_id = req.session.user_id;
+  const user_name = req.session.user_name;
+
+  try {
+    let user_yn = await userModel.findUserSubscribe(user_id);
+
+    if (user_yn == "Y") {
+      user_yn = "N";
+      await userModel.updateUserSubscribe({ user_id, user_yn });
+      res.send({ isSuccess: false, msg: user_name + "님 구독취소하였습니다." });
+    } else if (user_yn == "N") {
+      user_yn = "Y";
+      await userModel.updateUserSubscribe({ user_id, user_yn });
+      res.send({ isSuccess: true, msg: user_name + "님 구독하였습니다." });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ isSuccess: false, msg: "서버 오류" });
+  }
+};
+
+exports.getCheckAlarm = async (req, res) => {
+  const user_id = req.session.user_id;
+
+  try {
+    let user_cnt = await userModel.UserSubscribeCnt(user_id);
+    console.log(user_cnt);
+    if (user_cnt > 0) {
+      res.send({ isSuccess: true, msg: "이미 구독되어있습니다." });
+    } else {
+      res.send({ isSuccess: false, msg: "구독하시겠습니까?" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ isSuccess: false, msg: "서버 오류" });
   }
 };

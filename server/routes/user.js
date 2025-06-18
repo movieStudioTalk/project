@@ -15,4 +15,8 @@ router.get("/kakaoLogin", controller.postKakaoLogin);
 //로그인세션
 router.get("/checkSession", controller.checkSession);
 
+//알람
+router.post("/alarm", controller.checkAlarm);
+router.get("/alarmStatus", controller.getCheckAlarm);
+
 module.exports = router;

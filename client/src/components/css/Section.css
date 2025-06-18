@@ -90,6 +90,10 @@
    opacity: 1;
 }
 
+.product-card.empty-card {
+   visibility: hidden;
+}
+
 /* ✅ PC 반응형 스타일 */
 @media screen and (min-width: 769px) {
    .slider-section {

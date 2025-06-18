@@ -1,0 +1,49 @@
+.navbar {
+   position: fixed;
+   top: 0;
+   width: 100%;
+   background-color: #fff;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 1rem 2rem;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+   z-index: 1000;
+}
+
+.navbar__logo img {
+   height: 40px;
+}
+
+.navbar__actions {
+   display: flex;
+   align-items: center;
+}
+
+.alarm-btn,
+.login-btn {
+   display: flex;
+   align-items: center;
+   margin-left: 1rem;
+   padding: 0.5rem 1rem;
+   border: none;
+   background-color: transparent;
+   cursor: pointer;
+}
+
+.alarm-btn p,
+.login-btn p {
+   margin: 0 0 0 0.5rem;
+   font-size: 0.9rem;
+}
+
+.alarmIcon,
+.loginIcon {
+   width: 20px;
+   height: 20px;
+}
+
+.user-name {
+   margin-left: 1rem;
+   font-weight: 500;
+}
