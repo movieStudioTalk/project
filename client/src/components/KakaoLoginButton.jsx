@@ -1,5 +1,5 @@
 import React from "react";
-import kakaoBtn from "../images/kakao_login.png";
+import kakaoBtn from "../assets/kakao_login.png";
 
 const KakaoLoginButton = () => {
   const client_id = "10afc90eb5407b9214efa7383c88c687";

@@ -1,64 +1,62 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import logoImg from "../images/logo.png";
-import { AuthContext } from "./AuthContext";
-import api from "../js/api";
+import "./css/Header.css";
+import bg1 from "../assets/bg1.png";
+import bg2 from "../assets/bg2.png";
+import bg3 from "../assets/bg3.png";
+import { useEffect, useState } from "react";
 
-const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { isLoggedIn, logName, setIsLoggedIn, setLogName } =
-    useContext(AuthContext);
-  const navigate = useNavigate();
+const sliderImages = [bg1, bg2, bg3];
 
-  const handleScroll = () => {
-    if (window.scrollY > 0) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
-  };
+function Header() {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % sliderImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
-  const handleLogin = () => {
-    navigate("/login");
-  };
-
-  const handleLogout = async () => {
-    await api.post("/user/userLogout");
-    setIsLoggedIn(false);
-    setLogName("");
-    alert("로그아웃 되었습니다.");
-    navigate("/");
-  };
-
   return (
-    <header className={`main-header ${isScrolled ? "scrolled" : ""}`}>
-      <div className="logo-area">
-        <a href="/">
-          <img src={logoImg} alt="GOOD-PING Logo" className="logo" />
-        </a>
+    <div className="slider">
+      <div
+        className="slides"
+        style={{ transform: `translateX(-${currentIndex * 100}vw)` }}
+      >
+        {sliderImages.map((img, i) => (
+          <div
+            key={i}
+            className="slide"
+            style={{ backgroundImage: `url(${img})` }}
+            onClick={() => console.log(`배경 클릭됨`)}
+          ></div>
+        ))}
       </div>
-      <div className="login-area">
-        {isLoggedIn ? (
-          <>
-            <span>{logName}님</span>
-            <button className="login-button" onClick={handleLogout}>
-              로그아웃
-            </button>
-          </>
-        ) : (
-          <button className="login-button" onClick={handleLogin}>
-            로그인
+
+      <div className="pagination">
+        {sliderImages.map((_, i) => (
+          <button
+            key={i}
+            className={`dot ${currentIndex === i ? "active" : ""}`}
+            onClick={() => setCurrentIndex(i)}
+            aria-label={`Go to slide ${i + 1}`}
+          ></button>
+        ))}
+      </div>
+
+      <div className="overlay">
+        <div className="center-text">
+          <h1>한정판 굿즈 출시</h1>
+          <p>지금 바로 만나보세요!</p>
+          <button
+            className="cta-btn"
+            onClick={() => console.log("구매하러 가기 클릭")}
+          >
+            구매하러 가기
           </button>
-        )}
+        </div>
       </div>
-    </header>
+    </div>
   );
-};
+}
 
 export default Header;

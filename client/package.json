@@ -18,7 +18,8 @@
     "react-kakao-login": "^2.1.1",
     "react-router-dom": "^7.6.2",
     "react-slick": "^0.30.3",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.2.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

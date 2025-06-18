@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../js/api";
 import { AuthContext } from "./AuthContext";
 import KakaoLoginButton from "./KakaoLoginButton";
-import "../css/Login.css";
+import "./css/Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
