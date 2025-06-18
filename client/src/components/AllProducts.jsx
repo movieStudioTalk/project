@@ -49,7 +49,7 @@ function AllProducts({ items, openProductModal }) {
                <div
                   key={item.id || idx}
                   className="all-products-item"
-                  onClick={() => openProductModal(true, item)}
+                  onClick={() => openProductModal(item, true)}
                >
                   <ProductCard item={item} index={idx} />
                </div>
