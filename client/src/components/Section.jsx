@@ -80,6 +80,15 @@ function Section({
                            />
                         );
                      })}
+                     {group.length < itemsPerSlide &&
+                        Array.from({
+                           length: itemsPerSlide - group.length,
+                        }).map((_, i) => (
+                           <div
+                              key={`empty-${i}`}
+                              className="product-card empty-card"
+                           />
+                        ))}
                   </div>
                </SwiperSlide>
             ))}
