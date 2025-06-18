@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Header from "./components/Header";
@@ -8,17 +8,40 @@ import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 import TopButton from "./components/TopButton";
 import AllProducts from "./components/AllProducts";
-import products from "./js/products";
+// import products from "./js/products";
 import Login from "./components/Login";
 import CreateModal from "./components/CreateModal";
 import Register from "./components/Register";
 import { AuthProvider } from "./components/AuthContext";
 import KakaoSuccess from "./components/KakaoSuccess";
+import api from "./js/api";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAll, setShowAll] = useState(false); // ✅ 전체보기 토글 상태
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    card();
+  }, []);
+
+  const card = async () => {
+    try {
+      const res = await api.get("/reserv/reservList", {});
+
+      if (res.data.isSuccess) {
+        console.log(res.data.map);
+        setProducts(res.data.map);
+      } else {
+        alert(res.data.msg);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("서버 오류가 발생했습니다.");
+    }
+  };
+
   return (
     <AuthProvider>
       <Router>
@@ -31,10 +54,7 @@ function App() {
                 <Header />
                 <div id="contents">
                   {showAll ? (
-                    <AllProducts
-                      items={products}
-                      setModalOpen={setIsModalOpen}
-                    />
+                    <AllProducts setModalOpen={setIsModalOpen} />
                   ) : (
                     <>
                       <Section

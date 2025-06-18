@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./css/Modal.css";
 
 function Modal({ product, onClose }) {
-  const [mainImage, setMainImage] = useState(product.images[0]);
+  const [mainImage, setMainImage] = useState(product.file_paths[0]);
   const [form, setForm] = useState({
     name: "",
     zip_code: "",
@@ -65,7 +65,7 @@ function Modal({ product, onClose }) {
             <img src={mainImage} alt="선택 이미지" />
           </div>
           <div className="thumbnail-list">
-            {product.images.map((img, idx) => (
+            {product.file_paths.map((img, idx) => (
               <img
                 key={idx}
                 src={img}
@@ -79,7 +79,7 @@ function Modal({ product, onClose }) {
 
         {/* 오른쪽: 상품 정보 및 입력 */}
         <div className="modal-right">
-          <h2 className="detailName">{product.name}</h2>
+          <h2 className="detailName">{product.title}</h2>
           <p className="detailPrice">{product.price}</p>
 
           <form className="order-form">

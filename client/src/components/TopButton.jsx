@@ -1,5 +1,6 @@
 // components/TopButton.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "./AuthContext";
 import "./css/TopButton.css";
 
 function TopButton({
@@ -10,6 +11,7 @@ function TopButton({
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const [showAll, setShowAll] = useState(true); // UI 텍스트 전용 상태
+  const { isLoggedIn, logId } = useContext(AuthContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,9 +57,11 @@ function TopButton({
   return (
     isVisible && (
       <div className="top-button-group">
-        <button className="create-button" onClick={onOpenCreateModal}>
-          상품 추가하기
-        </button>
+        {isLoggedIn && logId === "admin" && (
+          <button className="create-button" onClick={onOpenCreateModal}>
+            상품 추가하기
+          </button>
+        )}
         <button className="filter-toggle-button" onClick={toggleView}>
           {showAll ? "상품 전체보기" : "상품 분류하기"}
         </button>

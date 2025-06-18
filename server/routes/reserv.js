@@ -7,4 +7,7 @@ const controller = require("../controller/Reserv");
 //굿즈 목록생성
 router.post("/reservAdd", upload.array("files", 10), controller.postReservAdd);
 
+//굿즈 목록LIST
+router.get("/reservList", controller.getReservList);
+
 module.exports = router;

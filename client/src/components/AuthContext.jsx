@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [logName, setLogName] = useState("");
+  const [logId, setLogId] = useState("");
   const [currentAlarm, setAlarm] = useState(false);
 
   const checkLogin = async () => {
@@ -14,6 +15,7 @@ export const AuthProvider = ({ children }) => {
       if (res.data.isLoggedIn) {
         setIsLoggedIn(true);
         setLogName(res.data.user_name);
+        setLogId(res.data.user_id);
       } else {
         setIsLoggedIn(false);
         setLogName("");
@@ -47,6 +49,8 @@ export const AuthProvider = ({ children }) => {
         setIsLoggedIn,
         logName,
         setLogName,
+        logId,
+        setLogId,
         checkLogin,
         currentAlarm,
         setAlarm,
