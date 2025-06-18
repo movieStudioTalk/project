@@ -3,10 +3,10 @@ import React from "react";
 import ProductCard from "./ProductCard";
 import "./css/AllProducts.css";
 
-function AllProducts({ items, setModalOpen }) {
+function AllProducts({ items, openProductModal }) {
    const handleClick = (item) => {
       // 예: 모달 열 때 선택한 아이템 전달 가능하게
-      setModalOpen(true, item);
+      openProductModal(item, true);
    };
 
    return (

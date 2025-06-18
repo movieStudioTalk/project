@@ -1,15 +1,16 @@
 // components/TopButton.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./css/TopButton.css";
 
 function TopButton({
-   isModalOpen,
+   showModal,
    onToggleFilter,
    onOpenCreateModal,
    isCreateModalOpen,
 }) {
    const [isVisible, setIsVisible] = useState(false);
    const [showAll, setShowAll] = useState(true); // UI 텍스트 전용 상태
+   const didMountRef = useRef(false); // 최초 마운트 여부 체크용
 
    useEffect(() => {
       const handleScroll = () => {
@@ -20,12 +21,17 @@ function TopButton({
    }, []);
 
    const scrollToTop = () => {
-      if (!isModalOpen && !isCreateModalOpen) {
+      if (!showModal && !isCreateModalOpen) {
          window.scrollTo({ top: 0, behavior: "smooth" });
       }
    };
    useEffect(() => {
-      scrollToAllProducts();
+      if (didMountRef.current) {
+         // 마운트 후 showAll이 바뀔 때만 실행
+         scrollToAllProducts();
+      } else {
+         didMountRef.current = true; // 첫 렌더링 무시
+      }
    }, [showAll]);
 
    const scrollToAllProducts = () => {
@@ -50,11 +56,9 @@ function TopButton({
       scrollToAllProducts();
    };
 
-   if (isModalOpen || isCreateModalOpen) return null;
-
    return (
       isVisible && (
-         <div className="top-button-group">
+         <div className={`top-button-group`}>
             <button className="create-button" onClick={onOpenCreateModal}>
                상품 추가하기
             </button>
