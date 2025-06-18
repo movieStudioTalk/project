@@ -10,7 +10,7 @@ function AllProducts({ items, setModalOpen }) {
    };
 
    return (
-      <section className="all-products-section">
+      <section className="all-products-section" id="allProducts">
          <h2 className="all-products-title">상품 전체보기</h2>
          <div className="all-products-grid">
             {items.map((item, index) => (

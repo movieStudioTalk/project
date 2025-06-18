@@ -12,7 +12,8 @@
 }
 
 .top-button,
-.filter-toggle-button {
+.filter-toggle-button,
+.create-button {
    padding: 10px 14px;
    font-size: 14px;
    color: white;
@@ -30,9 +31,11 @@
    background-color: yellowgreen;
 }
 
-.filter-toggle-button {
+.filter-toggle-button,
+.create-button {
    background-color: #555;
 }
-.filter-toggle-button:hover {
+.filter-toggle-button:hover,
+.create-button:hover {
    background-color: #777;
 }

@@ -45,14 +45,8 @@ function Header() {
 
          <div className="overlay">
             <div className="center-text">
-               <h1>한정판 굿즈 출시</h1>
-               <p>지금 바로 만나보세요!</p>
-               <button
-                  className="cta-btn"
-                  onClick={() => console.log("구매하러 가기 클릭")}
-               >
-                  구매하러 가기
-               </button>
+               <h1>웹툰 굿즈들을 이곳에서!</h1>
+               <p>우리 함께 덕질해요</p>
             </div>
          </div>
       </div>
