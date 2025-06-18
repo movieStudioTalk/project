@@ -13,7 +13,6 @@
 
    /* 투명 상태: 배경 없음 + 하단 실선 */
    background-color: transparent;
-   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
    box-shadow: none;
 }
 
