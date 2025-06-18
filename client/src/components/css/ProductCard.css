@@ -55,7 +55,7 @@
 
 .info {
    padding: 10px;
-   height: 88px;
+   min-height: 130px;
 }
 
 .name {
@@ -81,5 +81,8 @@
 
    .price {
       font-size: 14px;
+   }
+   .info {
+      min-height: 88px;
    }
 }

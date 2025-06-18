@@ -11,14 +11,22 @@ import AllProducts from "./components/AllProducts";
 import products from "./js/products";
 import Login from "./components/Login";
 import CreateModal from "./components/CreateModal";
+import Modal from "./components/Modal";
 import Register from "./components/Register";
 import { AuthProvider } from "./components/AuthContext";
 import KakaoSuccess from "./components/KakaoSuccess";
 
 function App() {
-   const [isModalOpen, setIsModalOpen] = useState(false);
    const [showAll, setShowAll] = useState(false); // ✅ 전체보기 토글 상태
    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+   const [showModal, setShowModal] = useState(false);
+   const [selectedProduct, setSelectedProduct] = useState(null);
+
+   const openProductModal = (item) => {
+      setSelectedProduct(item);
+      setShowModal(true);
+   };
+
    return (
       <AuthProvider>
          <Router>
@@ -33,7 +41,7 @@ function App() {
                            {showAll ? (
                               <AllProducts
                                  items={products}
-                                 setModalOpen={setIsModalOpen}
+                                 openProductModal={openProductModal}
                               />
                            ) : (
                               <>
@@ -42,20 +50,20 @@ function App() {
                                     items={products}
                                     showRank={true}
                                     sectionId="popular"
-                                    setModalOpen={setIsModalOpen}
+                                    openProductModal={openProductModal}
                                  />
                                  <Section
                                     title="새로운 상품"
                                     items={products}
                                     sectionId="new"
-                                    setModalOpen={setIsModalOpen}
+                                    openProductModal={openProductModal}
                                  />
                                  <Section
                                     title="단행본"
                                     items={products}
                                     sectionId="readBook"
                                     showSpecial={true}
-                                    setModalOpen={setIsModalOpen}
+                                    openProductModal={openProductModal}
                                  />
                               </>
                            )}
@@ -63,7 +71,7 @@ function App() {
                         <FAQ />
                         <Footer />
                         <TopButton
-                           isModalOpen={isModalOpen}
+                           showModal={showModal}
                            onToggleFilter={() => setShowAll((prev) => !prev)} // ✅ 토글 전달
                            onOpenCreateModal={() => setIsCreateModalOpen(true)}
                         />
@@ -71,6 +79,16 @@ function App() {
                         {isCreateModalOpen && (
                            <CreateModal
                               onClose={() => setIsCreateModalOpen(false)}
+                           />
+                        )}
+
+                        {showModal && selectedProduct && (
+                           <Modal
+                              product={selectedProduct}
+                              onClose={() => {
+                                 setShowModal(false);
+                                 setSelectedProduct(null);
+                              }}
                            />
                         )}
                      </div>

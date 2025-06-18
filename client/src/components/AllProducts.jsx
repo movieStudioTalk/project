@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ProductCard from "./ProductCard";
 import "./css/AllProducts.css";
 
-function AllProducts({ items, setModalOpen }) {
+function AllProducts({ items, openProductModal }) {
    const [currentPage, setCurrentPage] = useState(1);
    const itemsPerPage = 12;
    const pageCount = Math.ceil(items.length / itemsPerPage);
@@ -49,7 +49,7 @@ function AllProducts({ items, setModalOpen }) {
                <div
                   key={item.id || idx}
                   className="all-products-item"
-                  onClick={() => setModalOpen(true, item)}
+                  onClick={() => openProductModal(true, item)}
                >
                   <ProductCard item={item} index={idx} />
                </div>

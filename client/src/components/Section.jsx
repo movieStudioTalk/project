@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { SwiperSlide } from "swiper/react";
 import CustomSwiper from "./CustomSwiper";
-import Modal from "./Modal";
 import ProductCard from "./ProductCard";
 import "./css/Section.css";
 
@@ -11,11 +10,9 @@ function Section({
    showRank = false,
    sectionId,
    showSpecial = false,
-   setModalOpen,
+   openProductModal,
 }) {
    const [itemsPerSlide, setItemsPerSlide] = useState(2);
-   const [showModal, setShowModal] = useState(false);
-   const [selectedProduct, setSelectedProduct] = useState(null);
 
    useEffect(() => {
       const updateItemsPerSlide = () => {
@@ -49,17 +46,6 @@ function Section({
       groupedItems.push(limitedItems.slice(i, i + itemsPerSlide));
    }
 
-   const openModal = (item) => {
-      setSelectedProduct(item);
-      setShowModal(true);
-      setModalOpen?.(true);
-   };
-
-   const closeModal = () => {
-      setShowModal(false);
-      setModalOpen?.(false);
-   };
-
    return (
       <section id={sectionId} className="slider-section">
          <h2 className="section-title">{title}</h2>
@@ -76,7 +62,7 @@ function Section({
                               index={index}
                               showRank={showRank}
                               showSpecial={showSpecial}
-                              onClick={openModal}
+                              onClick={() => openProductModal(item)}
                            />
                         );
                      })}
@@ -93,10 +79,6 @@ function Section({
                </SwiperSlide>
             ))}
          </CustomSwiper>
-
-         {showModal && selectedProduct && (
-            <Modal product={selectedProduct} onClose={closeModal} />
-         )}
       </section>
    );
 }
