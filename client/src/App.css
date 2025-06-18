@@ -9,8 +9,13 @@ html {
    height: 100%;
 }
 
-/* 네비바 고정 높이만큼 본문 최상단 여백 추가 */
+/* 네비바 고정 높이만큼 본문 최상단 여백 추가 기본 제거 */
 #main {
+   padding-top: 0;
+}
+
+/* 스크롤 후에만 padding-top 적용 */
+body.nav-solid #main {
    padding-top: 64px;
 }
 
