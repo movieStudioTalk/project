@@ -22,4 +22,7 @@ router.get("/alarmStatus", controller.getCheckAlarm);
 //마이페이지 유저정보
 router.get("/mypageInfo", controller.getMypageInfo);
 
+//email 인증
+router.post("/emailCert", controller.postEmailCert);
+
 module.exports = router;

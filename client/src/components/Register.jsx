@@ -11,9 +11,12 @@ const Register = () => {
     user_name: "",
     user_email: "",
     account_type: "home",
+    cert_code: "",
   });
 
   const [message, setMessage] = useState("");
+  const [code, setCode] = useState("");
+  const [cert, setCert] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,6 +58,11 @@ const Register = () => {
       return;
     }
 
+    if (!cert) {
+      alert("이메일인증을 입력해주세요.");
+      return;
+    }
+
     try {
       const res = await api.post("/user/userAdd", {
         user_id: formData.user_id,
@@ -75,6 +83,35 @@ const Register = () => {
     } catch (error) {
       console.error(error);
       setMessage("서버 오류가 발생했습니다.");
+    }
+  };
+
+  const emailCert = async () => {
+    try {
+      const res = await api.post("/user/emailCert", {
+        user_email: formData.user_email,
+      });
+
+      if (res.data.isSuccess) {
+        alert(res.data.msg);
+        setCode(res.data.code);
+      } else {
+        alert("이메일 인증 실패: " + res.data.msg);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("서버 오류가 발생했습니다.");
+    }
+  };
+
+  const emailCertConfirm = () => {
+    console.log(code);
+    console.log(formData.cert_code);
+    if (code == formData.cert_code) {
+      alert("이메일 인증이 완료되었습니다.");
+      setCert(true);
+    } else {
+      alert("이메일 인증코드가 틀렸습니다.");
     }
   };
 
@@ -128,13 +165,33 @@ const Register = () => {
           value={formData.user_name}
           onChange={handleChange}
         />
-        <input
-          type="email"
-          name="user_email"
-          placeholder="이메일"
-          value={formData.user_email}
-          onChange={handleChange}
-        />
+        <div className="email-form-wrap">
+          <input
+            type="email"
+            name="user_email"
+            placeholder="이메일"
+            value={formData.user_email}
+            onChange={handleChange}
+          />
+          {code ? (
+            <button type="button" onClick={emailCertConfirm}>
+              이메일확인
+            </button>
+          ) : (
+            <button type="button" onClick={emailCert}>
+              이메일인증
+            </button>
+          )}
+        </div>
+        {code && (
+          <input
+            type="text"
+            name="cert_code"
+            placeholder="인증번호 입력"
+            value={formData.cert_code}
+            onChange={handleChange}
+          />
+        )}
         <button type="submit">회원가입 완료</button>
       </form>
       {message && <p>{message}</p>}

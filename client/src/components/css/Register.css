@@ -8,8 +8,9 @@
 .register-form {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 400px;
   gap: 20px;
+  margin-top: 30px;
 }
 
 .register-form input {
@@ -17,6 +18,19 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 16px;
+}
+
+.email-form-wrap {
+  display: flex;
+  gap: 15px;
+}
+
+.email-form-wrap input {
+  width: 100%;
+}
+
+.email-form-wrap button {
+  width: 170px;
 }
 
 .register-form button {

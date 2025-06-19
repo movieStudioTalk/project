@@ -1,5 +1,7 @@
 const userModel = require("../model/user");
+const nodemailer = require("nodemailer");
 const axios = require("axios");
+require("dotenv").config();
 
 exports.postUserAdd = async (req, res) => {
   const { user_id, user_pw, user_name, user_phone, user_email, account_type } =
@@ -218,5 +220,42 @@ exports.getMypageInfo = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send({ isSuccess: false, msg: "서버 오류" });
+  }
+};
+
+exports.postEmailCert = async (req, res) => {
+  const { user_email } = req.body;
+
+  const code = Math.floor(100000 + Math.random() * 900000);
+
+  try {
+    // 이메일 전송 설정
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_ID,
+        pass: process.env.EMAIL_PW, // 앱 비밀번호
+      },
+    });
+
+    // 메일 내용
+    let mailOptions = {
+      from: '"GOOD-PING" <your-email@gmail.com>',
+      to: user_email,
+      subject: "GOOD-PING 이메일 인증코드",
+      text: `인증코드는 [${code}] 입니다.`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    // 클라이언트에 코드 전송 (보안상 실제로는 세션에 저장하거나 백엔드에서 검증)
+    res.send({
+      isSuccess: true,
+      code: code,
+      msg: "인증 이메일이 발송되었습니다.",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ isSuccess: false, msg: "메일 전송 실패" });
   }
 };
