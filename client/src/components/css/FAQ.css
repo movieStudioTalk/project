@@ -1,43 +1,47 @@
 /* src/components/css/FAQ.css */
 
 .faq-section {
-   width: 100%;
-   max-width: 800px;
-   margin: 0 auto;
-   padding: 2rem 1rem;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  margin-bottom: 60px;
 }
 
 .faq-title {
-   font-size: 1.5rem;
-   margin-bottom: 1.5rem;
-   font-weight: 600;
+  /* font-size: 1.5rem; */
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
 .faq-list {
-   display: flex;
-   flex-direction: column;
-   gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .faq-item {
-   border-bottom: 1px solid #ddd;
-   padding-bottom: 0.75rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.75rem;
 }
 
 .faq-question {
-   font-weight: bold;
-   cursor: pointer;
-   list-style: none;
-   outline: none;
+  font-weight: bold;
+  cursor: pointer;
+  list-style: none;
+  outline: none;
+  font-size: 25px;
 }
 
 .faq-answer {
-   margin: 0.5rem 0 0;
-   color: #555;
-   line-height: 1.5;
+  margin: 0.5rem 0 0;
+  color: #555;
+  line-height: 1.5;
 }
 
 details[open] .faq-question {
-   /* 펼쳐졌을 때 질문 폰트 색상 변경 등 */
-   color: #0078ff;
+  /* 펼쳐졌을 때 질문 폰트 색상 변경 등 */
+  color: #0078ff;
 }
