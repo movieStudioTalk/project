@@ -15,9 +15,9 @@ html {
 }
 
 /* 스크롤 후에만 padding-top 적용 */
-body.nav-solid #main {
+/* body.nav-solid #main {
   padding-top: 64px;
-}
+} */
 
 #contents {
   margin: 20px;
