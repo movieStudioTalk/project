@@ -244,7 +244,7 @@ exports.postEmailCert = async (req, res) => {
 
     // 메일 내용
     let mailOptions = {
-      from: '"GOOD-PING" <your-email@gmail.com>',
+      from: '"GOOD-PING" <GOOD-PING@gmail.com>',
       to: user_email,
       subject: "GOOD-PING 이메일 인증코드",
       text: `인증코드는 [${code}] 입니다.`,
