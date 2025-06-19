@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Header from "./components/Header";
@@ -15,10 +15,8 @@ import Modal from "./components/Modal";
 import Register from "./components/Register";
 import { AuthProvider } from "./components/AuthContext";
 import KakaoSuccess from "./components/KakaoSuccess";
-import api from "./js/api";
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAll, setShowAll] = useState(false); // ✅ 전체보기 토글 상태
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -58,7 +56,6 @@ function App() {
                       <Section
                         title="단행본"
                         sectionId="readBook"
-                        showSpecial={true}
                         openProductModal={openProductModal}
                       />
                     </>
@@ -67,11 +64,10 @@ function App() {
                 <FAQ />
                 <Footer />
                 <TopButton
-                  isModalOpen={isModalOpen}
+                  showModal={showModal}
                   onToggleFilter={() => setShowAll((prev) => !prev)} // ✅ 토글 전달
                   onOpenCreateModal={() => setIsCreateModalOpen(true)}
                 />
-
                 {isCreateModalOpen && (
                   <CreateModal onClose={() => setIsCreateModalOpen(false)} />
                 )}

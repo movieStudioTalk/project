@@ -5,13 +5,7 @@ import ProductCard from "./ProductCard";
 import api from "../js/api";
 import "./css/Section.css";
 
-function Section({
-  title,
-  showRank = false,
-  sectionId,
-  showSpecial = false,
-  openProductModal,
-}) {
+function Section({ title, showRank = false, sectionId, openProductModal }) {
   const [itemsPerSlide, setItemsPerSlide] = useState(2);
   const [sortedItems, setSortedItems] = useState([]);
 
@@ -74,7 +68,6 @@ function Section({
                     item={item}
                     index={index}
                     showRank={showRank}
-                    showSpecial={showSpecial}
                     onClick={() => openProductModal(item)}
                   />
                 );
