@@ -58,9 +58,9 @@ const Mypage = () => {
   const reserv_info = async () => {
     try {
       const res = await api.get("/reserv/mypageInfo", {});
-      const userData = res.data.info[0];
+      const userData = res.data.info;
 
-      setReservData(userData);
+      setReservData(Array.isArray(userData) ? userData : [userData]);
     } catch (err) {
       console.error("인기 상품 가져오기 실패:", err);
     }
@@ -100,12 +100,14 @@ const Mypage = () => {
           </tr>
         </thead>
         <tbody>
-          {reservData ? (
-            <tr>
-              <td>{reservData.title}</td>
-              <td>{Number(reservData.price).toLocaleString()}원</td>
-              <td>{new Date(reservData.create_date).toLocaleDateString()}</td>
-            </tr>
+          {reservData && reservData.length > 0 ? (
+            reservData.map((item, index) => (
+              <tr key={index}>
+                <td>{item.title}</td>
+                <td>{Number(item.price).toLocaleString()}원</td>
+                <td>{new Date(item.create_date).toLocaleDateString()}</td>
+              </tr>
+            ))
           ) : (
             <tr>
               <td colSpan="3">로딩 중...</td>

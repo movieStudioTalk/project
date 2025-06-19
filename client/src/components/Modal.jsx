@@ -105,7 +105,9 @@ function Modal({ product, onClose }) {
         {/* 오른쪽: 상품 정보 및 입력 */}
         <div className="modal-right">
           <h2 className="detailName">{product.title}</h2>
-          <p className="detailPrice">{product.price}</p>
+          <p className="detailPrice">
+            ￦{Number(product.price).toLocaleString()}원
+          </p>
 
           <form className="order-form" onSubmit={handleSubmit}>
             {isLoggedIn ? (
@@ -118,7 +120,7 @@ function Modal({ product, onClose }) {
                   value={logName}
                   readOnly
                 />
-                <div>
+                <div className="zip-wrap">
                   <input
                     type="text"
                     name="zip_code"
