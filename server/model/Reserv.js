@@ -37,7 +37,7 @@ exports.selectReservList = async (text) => {
   query += `GROUP BY a.idx, a.title `;
 
   if (sectionId == "popular") {
-    query += `ORDER BY sales DESC
+    query += `ORDER BY sales DESC, a.idx DESC
         LIMIT 8`;
   } else {
     query += `ORDER BY a.idx DESC`;
