@@ -1,18 +1,19 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
 import CustomSwiper from "./CustomSwiper";
 import ProductCard from "./ProductCard";
+import api from "../js/api";
 import "./css/Section.css";
 
 function Section({
   title,
-  items,
   showRank = false,
   sectionId,
   showSpecial = false,
   openProductModal,
 }) {
   const [itemsPerSlide, setItemsPerSlide] = useState(2);
+  const [sortedItems, setSortedItems] = useState([]);
 
   useEffect(() => {
     const updateItemsPerSlide = () => {
@@ -23,23 +24,33 @@ function Section({
     return () => window.removeEventListener("resize", updateItemsPerSlide);
   }, []);
 
-  const sortedItems = useMemo(() => {
-    let filtered = [...items];
+  useEffect(() => {
+    const processItems = async () => {
+      try {
+        console.log(sectionId);
+        const res = await api.get("/reserv/reservList", {
+          params: { sectionId: sectionId },
+        });
+        let filtered = [...res.data.map];
 
-    if (sectionId === "readBook") {
-      filtered = filtered.filter((item) => item.category === "book");
-    }
+        if (sectionId === "readBook") {
+          filtered = filtered.filter((item) => item.category === "book");
+        } else if (sectionId === "popular") {
+          filtered.sort((a, b) => b.sales - a.sales);
+        } else if (sectionId === "new") {
+          filtered.sort(
+            (a, b) => new Date(b.create_date) - new Date(a.create_date)
+          );
+        }
 
-    if (sectionId === "popular") {
-      return filtered.sort((a, b) => b.sales - a.sales);
-    } else if (sectionId === "new") {
-      return filtered.sort(
-        (a, b) => new Date(b.create_date) - new Date(a.create_date)
-      );
-    }
+        setSortedItems(filtered);
+      } catch (err) {
+        console.error("인기 상품 가져오기 실패:", err);
+      }
+    };
 
-    return filtered;
-  }, [items, sectionId]);
+    processItems();
+  }, [sectionId]);
 
   const limitedItems = sortedItems.slice(0, 8);
 

@@ -18,7 +18,9 @@ function AllProducts({ openProductModal }) {
 
   const card = async () => {
     try {
-      const res = await api.get("/reserv/reservList", {});
+      const res = await api.get("/reserv/reservList", {
+        params: { sectionId: "board" },
+      });
 
       if (res.data.isSuccess) {
         setItems(res.data.map);

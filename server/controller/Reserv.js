@@ -38,8 +38,10 @@ exports.postReservAdd = async (req, res) => {
 };
 
 exports.getReservList = async (req, res) => {
+  console.log("sectionId:", req.query.sectionId);
+  const { sectionId } = req.query;
   try {
-    let selectList = await reservModel.selectReservList();
+    let selectList = await reservModel.selectReservList(sectionId);
 
     // selectList 안에 있는 각 item의 file_paths를 배열로 변환
     selectList.forEach((item) => {
@@ -49,6 +51,30 @@ exports.getReservList = async (req, res) => {
     });
 
     res.send({ isSuccess: true, map: selectList });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ isSuccess: false, msg: "서버 오류" });
+  }
+};
+
+exports.postReservPurchase = async (req, res) => {
+  const { rev_idx, user_id, user_name, zip_code, address, address_at, phone } =
+    req.body;
+  const create_ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+  console.log(req.body);
+  try {
+    await reservModel.insertReservPurchase({
+      rev_idx: rev_idx,
+      user_id: user_id,
+      user_name: user_name,
+      zip_code: zip_code,
+      address: address,
+      address_at: address_at,
+      phone: phone,
+      create_ip: create_ip,
+    });
+
+    res.send({ isSuccess: true, msg: "구매완료하였습니다." });
   } catch (error) {
     console.error(error);
     res.status(500).send({ isSuccess: false, msg: "서버 오류" });

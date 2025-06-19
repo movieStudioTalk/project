@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "./AuthContext";
+import api from "../js/api";
 import "./css/Modal.css";
 
 function Modal({ product, onClose }) {
   const [mainImage, setMainImage] = useState(product.file_paths[0]);
+  const { logName, logId, isLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [form, setForm] = useState({
-    name: "",
+    idx: product.idx,
+    id: logId,
+    name: logName,
     zip_code: "",
     address: "",
     address_at: "",
@@ -24,11 +31,27 @@ function Modal({ product, onClose }) {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleBuy = () => {
-    alert(
-      `구매 요청됨!\n이름: ${form.name}\n주소: ${form.address}\n전화번호: ${form.phone}`
-    );
-    onClose();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (confirm("구매하시겠습니까?")) {
+      const res = await api.post("/reserv/reservPurchase", {
+        rev_idx: form.idx,
+        user_id: form.id,
+        user_name: form.name,
+        zip_code: form.zip_code,
+        address: form.address,
+        address_at: form.address_at,
+        phone: form.phone,
+      });
+
+      if (res.data.isSuccess) {
+        alert(res.data.msg);
+        onClose();
+      } else {
+        alert(res.data.msg);
+      }
+    }
   };
 
   function zipCode() {
@@ -50,6 +73,8 @@ function Modal({ product, onClose }) {
       console.error(e);
     }
   }
+
+  const handleLogin = () => navigate("/login");
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -82,52 +107,71 @@ function Modal({ product, onClose }) {
           <h2 className="detailName">{product.title}</h2>
           <p className="detailPrice">{product.price}</p>
 
-          <form className="order-form">
-            <input
-              type="text"
-              name="name"
-              placeholder="이름"
-              value={form.name}
-              onChange={handleChange}
-            />
-            <div>
-              <input
-                type="text"
-                name="zip_code"
-                placeholder="우편번호"
-                value={form.zip_code}
-                onChange={handleChange}
-                readOnly
-              />
-              <button type="button" onClick={zipCode} className="zipButton">
-                주소검색
-              </button>
-            </div>
-            <input
-              type="text"
-              name="address"
-              placeholder="주소"
-              value={form.address}
-              onChange={handleChange}
-              readOnly
-            />
-            <input
-              type="text"
-              name="address_at"
-              placeholder="상세주소"
-              value={form.address_at}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="phone"
-              placeholder="전화번호"
-              value={form.phone}
-              onChange={handleChange}
-            />
-            <button type="button" onClick={handleBuy} id="buyButton">
-              구매하기
-            </button>
+          <form className="order-form" onSubmit={handleSubmit}>
+            {isLoggedIn ? (
+              <>
+                <input type="hidden" name="id" value={form.idx} />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="이름"
+                  value={logName}
+                  readOnly
+                />
+                <div>
+                  <input
+                    type="text"
+                    name="zip_code"
+                    placeholder="우편번호"
+                    value={form.zip_code}
+                    onChange={handleChange}
+                    readOnly
+                  />
+                  <button type="button" onClick={zipCode} className="zipButton">
+                    주소검색
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  name="address"
+                  placeholder="주소"
+                  value={form.address}
+                  onChange={handleChange}
+                  readOnly
+                />
+                <input
+                  type="text"
+                  name="address_at"
+                  placeholder="상세주소"
+                  value={form.address_at}
+                  onChange={handleChange}
+                />
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="전화번호"
+                  value={form.phone}
+                  onChange={(e) => {
+                    const onlyNums = e.target.value
+                      .replace(/[^0-9]/g, "")
+                      .slice(0, 11);
+                    setForm({
+                      ...form,
+                      phone: onlyNums,
+                    });
+                  }}
+                />
+                <button type="submit" id="buyButton">
+                  구매하기
+                </button>
+              </>
+            ) : (
+              <>
+                <button type="button" id="buyButton" onClick={handleLogin}>
+                  로그인
+                </button>
+              </>
+            )}
           </form>
         </div>
       </div>

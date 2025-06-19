@@ -10,4 +10,7 @@ router.post("/reservAdd", upload.array("files", 10), controller.postReservAdd);
 //굿즈 목록LIST
 router.get("/reservList", controller.getReservList);
 
+//구매하기
+router.post("/reservPurchase", controller.postReservPurchase);
+
 module.exports = router;

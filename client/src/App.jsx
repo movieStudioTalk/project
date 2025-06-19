@@ -21,33 +21,12 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showAll, setShowAll] = useState(false); // ✅ 전체보기 토글 상태
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [products, setProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const openProductModal = (item) => {
     setSelectedProduct(item);
     setShowModal(true);
-  };
-
-  useEffect(() => {
-    card();
-  }, []);
-
-  const card = async () => {
-    try {
-      const res = await api.get("/reserv/reservList", {});
-
-      if (res.data.isSuccess) {
-        console.log(res.data.map);
-        setProducts(res.data.map);
-      } else {
-        alert(res.data.msg);
-      }
-    } catch (error) {
-      console.error(error);
-      alert("서버 오류가 발생했습니다.");
-    }
   };
 
   return (
@@ -67,20 +46,17 @@ function App() {
                     <>
                       <Section
                         title="인기 상품"
-                        items={products}
                         showRank={true}
                         sectionId="popular"
                         openProductModal={openProductModal}
                       />
                       <Section
                         title="새로운 상품"
-                        items={products}
                         sectionId="new"
                         openProductModal={openProductModal}
                       />
                       <Section
                         title="단행본"
-                        items={products}
                         sectionId="readBook"
                         showSpecial={true}
                         openProductModal={openProductModal}
