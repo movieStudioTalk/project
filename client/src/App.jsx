@@ -38,6 +38,20 @@ function App() {
             element={
               <div id="main">
                 <Header />
+
+                {/* ✅ 추가된 꾸미기 영역 시작 */}
+                <section className="hero-banner">
+                  <h2>지금 인기 굿즈를 만나보세요 🔥</h2>
+                  <p>귀여움과 실용성 모두 갖춘 굿즈가 가득!</p>
+                </section>
+
+                <section className="features">
+                  <div className="feature-card">🚚 무료배송</div>
+                  <div className="feature-card">🎁 깜짝 할인</div>
+                  <div className="feature-card">💳 간편 결제</div>
+                </section>
+                {/* ✅ 추가된 꾸미기 영역 끝 */}
+
                 <div id="contents">
                   {showAll ? (
                     <AllProducts openProductModal={openProductModal} />
