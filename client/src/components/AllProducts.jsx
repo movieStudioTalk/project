@@ -1,11 +1,13 @@
 // components/AllProductsSection.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ProductCard from "./ProductCard";
 import api from "../js/api";
 import "./css/AllProducts.css";
 
 function AllProducts({ openProductModal }) {
   const [items, setItems] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const isComposing = useRef(false);
 
   const handleClick = (item) => {
     // 예: 모달 열 때 선택한 아이템 전달 가능하게
@@ -64,13 +66,43 @@ function AllProducts({ openProductModal }) {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentItems = items.slice(startIndex, startIndex + itemsPerPage);
 
+  const searchChange = async (value) => {
+    try {
+      const res = await api.get("/reserv/reservList", {
+        params: { searchValue: value },
+      });
+
+      setItems(res.data.map);
+    } catch (error) {
+      console.error(error);
+      alert("서버 오류가 발생했습니다.");
+    }
+  };
+
   return (
     <section className="all-products-section">
       <h2 className="all-products-title">상품 전체보기</h2>
 
       {/* 검색창 UI */}
       <div className="all-products-search">
-        <input type="text" placeholder="상품명으로 검색" />
+        <input
+          type="text"
+          placeholder="상품명으로 검색"
+          value={inputValue}
+          onChange={(e) => {
+            setInputValue(e.target.value);
+            if (!isComposing.current) {
+              searchChange(e.target.value);
+            }
+          }}
+          onCompositionStart={() => {
+            isComposing.current = true;
+          }}
+          onCompositionEnd={(e) => {
+            isComposing.current = false;
+            searchChange(e.target.value);
+          }}
+        />
       </div>
 
       {/* 상품 그리드 */}

@@ -38,10 +38,16 @@ exports.postReservAdd = async (req, res) => {
 };
 
 exports.getReservList = async (req, res) => {
-  console.log("sectionId:", req.query.sectionId);
   const { sectionId } = req.query;
+  let searchValue = "";
+  if (req.query.searchValue !== undefined) {
+    searchValue = req.query.searchValue;
+  }
   try {
-    let selectList = await reservModel.selectReservList(sectionId);
+    let selectList = await reservModel.selectReservList({
+      sectionId,
+      searchValue,
+    });
 
     // selectList 안에 있는 각 item의 file_paths를 배열로 변환
     selectList.forEach((item) => {

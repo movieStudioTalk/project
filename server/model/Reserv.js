@@ -9,7 +9,8 @@ exports.insertReserv = async (user) => {
   return result;
 };
 
-exports.selectReservList = async (sectionId) => {
+exports.selectReservList = async (text) => {
+  const { sectionId, searchValue } = text;
   let query = `
       SELECT 
         a.idx,
@@ -29,8 +30,11 @@ exports.selectReservList = async (sectionId) => {
   }
 
   query += `FROM reservation a 
-      LEFT JOIN file b ON a.file_idx = b.file_idx
-      GROUP BY a.idx, a.title `;
+            LEFT JOIN file b ON a.file_idx = b.file_idx `;
+  if (searchValue !== undefined || searchValue !== "") {
+    query += `WHERE a.title LIKE '%${searchValue}%' `;
+  }
+  query += `GROUP BY a.idx, a.title `;
 
   if (sectionId == "popular") {
     query += `ORDER BY sales DESC
