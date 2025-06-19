@@ -49,9 +49,12 @@ exports.postUserLogin = async (req, res) => {
 
     const user_name = userName[0]["user_name"];
 
+    const account_type = userName[0]["account_type"];
+
     if (count > 0) {
       req.session.user_id = user_id;
       req.session.user_name = user_name;
+      req.session.account_type = account_type;
       res.send({ isSuccess: true, msg: "로그인 완료!" });
     } else {
       res.send({ isSuccess: false, msg: "계정이 존재하지 않습니다." });
@@ -73,6 +76,7 @@ exports.checkSession = (req, res) => {
       isLoggedIn: true,
       user_id: req.session.user_id,
       user_name: req.session.user_name,
+      account_type: req.session.account_type,
     });
   } else {
     res.send({ isLoggedIn: false });
@@ -88,9 +92,9 @@ exports.postKakaoLogin = async (req, res) => {
 
   const client_id = "eff5a79672835d8e1007a61e5faecbd4";
   //로컬
-  // const redirect_uri = "http://localhost:8080/user/kakaoLogin"; // 네 React 콜백 URI와 반드시 일치
+  const redirect_uri = "http://localhost:8080/user/kakaoLogin"; // 네 React 콜백 URI와 반드시 일치
   //운영
-  const redirect_uri = "http://192.168.0.63:8080/user/kakaoLogin"; // 네 React 콜백 URI와 반드시 일치
+  // const redirect_uri = "http://192.168.0.63:8080/user/kakaoLogin"; // 네 React 콜백 URI와 반드시 일치
 
   try {
     // 1️⃣ access_token 발급 요청

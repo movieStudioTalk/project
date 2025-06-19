@@ -30,7 +30,7 @@ exports.selectUserLogin = async (user) => {
 exports.selectUserName = async (user) => {
   const { id, pw } = user;
   const [result] = await db.query(
-    "SELECT user_name FROM user_info WHERE user_id = ? AND user_pw = ?",
+    "SELECT user_name,account_type FROM user_info WHERE user_id = ? AND user_pw = ?",
     [id, pw]
   );
   return result;

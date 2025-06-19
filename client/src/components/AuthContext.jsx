@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [logName, setLogName] = useState("");
   const [logId, setLogId] = useState("");
+  const [logType, setLogType] = useState("");
   const [currentAlarm, setAlarm] = useState(false);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
 
@@ -17,6 +18,7 @@ export const AuthProvider = ({ children }) => {
         setIsLoggedIn(true);
         setLogName(res.data.user_name);
         setLogId(res.data.user_id);
+        setLogType(res.data.account_type);
       } else {
         setIsLoggedIn(false);
         setLogName("");
@@ -59,6 +61,8 @@ export const AuthProvider = ({ children }) => {
         setAlarm,
         fetchAlarmStatus,
         isAuthLoading,
+        logType,
+        setLogType,
       }}
     >
       {children}
