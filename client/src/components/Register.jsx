@@ -177,7 +177,7 @@ const Register = () => {
                />
                {code ? (
                   <button type="button" onClick={emailCertConfirm}>
-                     이메일확인
+                     인증번호확인
                   </button>
                ) : (
                   <button type="button" onClick={emailCert}>

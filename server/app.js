@@ -7,26 +7,27 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(
-  session({
-    secret: "my-secret-key", // 꼭 환경변수로 관리하세요
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      httpOnly: true,
-      maxAge: 60 * 60 * 1000, // 1시간 유지
-    },
-  })
+   session({
+      secret: "my-secret-key", // 꼭 환경변수로 관리하세요
+      resave: false,
+      saveUninitialized: true,
+      cookie: {
+         httpOnly: true,
+         maxAge: 60 * 60 * 1000, // 1시간 유지
+      },
+   })
 );
 
 app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:5000",
-      "http://good-ping.kro.kr",
-    ],
-    credentials: true,
-  })
+   cors({
+      origin: [
+         "http://localhost:5173",
+         "http://localhost:5000",
+         "http://good-ping.kro.kr",
+         "http://localhost:5174",
+      ],
+      credentials: true,
+   })
 );
 
 app.set("view engine", "ejs");
@@ -42,5 +43,5 @@ app.use("/reserv", reserv);
 app.use("/sms", solapi);
 
 app.listen(PORT, function () {
-  console.log(`Sever Open: http://localhost:${PORT}`);
+   console.log(`Sever Open: http://localhost:${PORT}`);
 });
