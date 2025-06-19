@@ -78,6 +78,9 @@ const NavBar = () => {
     }
   };
 
+  const locationMypage = () => {
+    navigate("/mypage");
+  };
   return (
     <nav className={`navbar ${isScrolled ? "solid" : ""}`}>
       <div className="navbar__logo">
@@ -94,7 +97,9 @@ const NavBar = () => {
         )}
         {isLoggedIn ? (
           <>
-            <span className="user-name">{logName}님</span>
+            <span className="user-name" onClick={locationMypage}>
+              {logName}님
+            </span>
             <button className="login-btn" onClick={handleLogout}>
               <img src={loginIcon} alt="logout" className="loginIcon" />
               <p>로그아웃</p>

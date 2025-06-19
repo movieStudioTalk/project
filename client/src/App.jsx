@@ -15,6 +15,7 @@ import Modal from "./components/Modal";
 import Register from "./components/Register";
 import { AuthProvider } from "./components/AuthContext";
 import KakaoSuccess from "./components/KakaoSuccess";
+import Mypage from "./components/Mypage";
 
 function App() {
   const [showAll, setShowAll] = useState(false); // ✅ 전체보기 토글 상태
@@ -87,6 +88,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/kakaoSuccess" element={<KakaoSuccess />} />
+          <Route path="/mypage" element={<Mypage />} />
         </Routes>
       </Router>
     </AuthProvider>
