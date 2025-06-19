@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import api from "../js/api";
+import Footer from "./Footer";
 import "./css/Mypage.css";
 
 const Mypage = () => {
@@ -68,71 +69,74 @@ const Mypage = () => {
   };
 
   return (
-    <div className="mypage-container">
-      {logType && logType === "home" && (
-        <>
-          <div className="mypage-btnDiv">
-            <h1>정보 수정</h1>
-            <button className="saveBtn">저장</button>
-          </div>
+    <>
+      <div className="mypage-container">
+        {logType && logType === "home" && (
+          <>
+            <div className="mypage-btnDiv">
+              <h1>정보 수정</h1>
+              <button className="saveBtn">저장</button>
+            </div>
 
-          <form className="mypage-form" onSubmit={handleSubmit}>
-            <input type="text" name="name" value={logName} disabled />
-            <input
-              type="text"
-              name="user_phone"
-              value={formData.user_phone}
-              onChange={handleChange}
-              placeholder="전화번호"
-            />
-            <input
-              type="text"
-              name="user_email"
-              value={formData.user_email}
-              onChange={handleChange}
-              placeholder="이메일"
-            />
-            <input
-              type="password"
-              name="user_pw"
-              placeholder="비밀번호"
-              onChange={handleChange}
-            />
-            <input
-              type="password"
-              name="password_at"
-              placeholder="비밀번호 확인"
-            />
-          </form>
-        </>
-      )}
+            <form className="mypage-form" onSubmit={handleSubmit}>
+              <input type="text" name="name" value={logName} disabled />
+              <input
+                type="text"
+                name="user_phone"
+                value={formData.user_phone}
+                onChange={handleChange}
+                placeholder="전화번호"
+              />
+              <input
+                type="text"
+                name="user_email"
+                value={formData.user_email}
+                onChange={handleChange}
+                placeholder="이메일"
+              />
+              <input
+                type="password"
+                name="user_pw"
+                placeholder="비밀번호"
+                onChange={handleChange}
+              />
+              <input
+                type="password"
+                name="password_at"
+                placeholder="비밀번호 확인"
+              />
+            </form>
+          </>
+        )}
 
-      <h1 className="buyTable">구매목록</h1>
-      <table className="mypage-table">
-        <thead>
-          <tr>
-            <th>상품명</th>
-            <th>가격</th>
-            <th>결제일</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reservData && reservData.length > 0 ? (
-            reservData.map((item, index) => (
-              <tr key={index}>
-                <td>{item.title}</td>
-                <td>{Number(item.price).toLocaleString()}원</td>
-                <td>{new Date(item.create_date).toLocaleDateString()}</td>
-              </tr>
-            ))
-          ) : (
+        <h1 className="buyTable">구매목록</h1>
+        <table className="mypage-table">
+          <thead>
             <tr>
-              <td colSpan="3">구매내역이 존재하지 않습니다.</td>
+              <th>상품명</th>
+              <th>가격</th>
+              <th>결제일</th>
             </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {reservData && reservData.length > 0 ? (
+              reservData.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.title}</td>
+                  <td>{Number(item.price).toLocaleString()}원</td>
+                  <td>{new Date(item.create_date).toLocaleDateString()}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3">구매내역이 존재하지 않습니다.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+      <Footer />
+    </>
   );
 };
 
