@@ -1,49 +1,62 @@
 .register-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 100px 20px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   padding: 100px 20px;
+   height: 100vh;
 }
 
 .register-form {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  gap: 20px;
-  margin-top: 30px;
+   display: flex;
+   flex-direction: column;
+   width: 400px;
+   gap: 20px;
+   margin-top: 30px;
 }
 
 .register-form input {
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
+   padding: 15px;
+   border: 1px solid #ddd;
+   border-radius: 8px;
+   font-size: 16px;
 }
 
 .email-form-wrap {
-  display: flex;
-  gap: 15px;
+   display: flex;
+   gap: 15px;
 }
 
 .email-form-wrap input {
-  width: 100%;
+   width: 100%;
 }
 
 .email-form-wrap button {
-  width: 170px;
+   width: 170px;
+   font-size: 16px;
+   padding: 15px;
+   border: none;
+   background-color: green;
+   color: #fff;
+   border-radius: 8px;
+   cursor: pointer;
+   transition: 0.3s;
+   height: 50px; /* ✅ 높이 명시적으로 맞춰주기 */
+   line-height: 1;
 }
 
-.register-form button {
-  padding: 15px;
-  border: none;
-  background-color: #4caf50;
-  color: #fff;
-  font-size: 18px;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: 0.3s;
+#submitBtn {
+   padding: 15px;
+   border: none;
+   background-color: green;
+   color: #fff;
+   font-size: 18px;
+   border-radius: 50px;
+   cursor: pointer;
+   transition: 0.3s;
 }
 
-.register-form button:hover {
-  background-color: #3e8e41;
+.register-form button:hover,
+#submitBtn:hover {
+   background-color: #004c00;
 }
