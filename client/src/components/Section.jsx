@@ -21,7 +21,6 @@ function Section({ title, showRank = false, sectionId, openProductModal }) {
   useEffect(() => {
     const processItems = async () => {
       try {
-        console.log(sectionId);
         const res = await api.get("/reserv/reservList", {
           params: { sectionId: sectionId },
         });

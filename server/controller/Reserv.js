@@ -80,3 +80,20 @@ exports.postReservPurchase = async (req, res) => {
     res.status(500).send({ isSuccess: false, msg: "서버 오류" });
   }
 };
+
+exports.getMypageInfo = async (req, res) => {
+  const user_id = req.session.user_id;
+
+  try {
+    let reserv_info = await reservModel.selectMypageInfo(user_id);
+
+    if (reserv_info) {
+      res.send({ isSuccess: true, info: reserv_info });
+    } else {
+      res.send({ isSuccess: false, info: null });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ isSuccess: false, msg: "서버 오류" });
+  }
+};

@@ -204,3 +204,19 @@ exports.getCheckAlarm = async (req, res) => {
     res.status(500).send({ isSuccess: false, msg: "서버 오류" });
   }
 };
+
+exports.getMypageInfo = async (req, res) => {
+  const user_id = req.session.user_id;
+
+  try {
+    let user_info = await userModel.getUserInfo(user_id);
+    if (user_info) {
+      res.send({ isSuccess: true, info: user_info });
+    } else {
+      res.send({ isSuccess: false, info: null });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ isSuccess: false, msg: "서버 오류" });
+  }
+};

@@ -69,3 +69,11 @@ exports.insertReservPurchase = async (user) => {
   );
   return result;
 };
+
+exports.selectMypageInfo = async (userid) => {
+  const [rows] = await db.query(
+    "SELECT * FROM reservation_info a LEFT JOIN reservation b ON a.rev_idx = b.idx WHERE user_id = ?",
+    [userid]
+  );
+  return rows;
+};

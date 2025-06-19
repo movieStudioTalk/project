@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [logName, setLogName] = useState("");
   const [logId, setLogId] = useState("");
   const [currentAlarm, setAlarm] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
 
   const checkLogin = async () => {
     try {
@@ -24,6 +25,8 @@ export const AuthProvider = ({ children }) => {
       console.error(err);
       setIsLoggedIn(false);
       setLogName("");
+    } finally {
+      setIsAuthLoading(false);
     }
   };
 
@@ -55,6 +58,7 @@ export const AuthProvider = ({ children }) => {
         currentAlarm,
         setAlarm,
         fetchAlarmStatus,
+        isAuthLoading,
       }}
     >
       {children}

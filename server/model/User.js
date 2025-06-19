@@ -77,3 +77,11 @@ exports.updateUserSubscribe = async (user) => {
   );
   return result;
 };
+
+exports.getUserInfo = async (userid) => {
+  const [rows] = await db.query(
+    "SELECT * FROM user_info WHERE user_id = ? AND account_type = 'home'",
+    [userid]
+  );
+  return rows;
+};

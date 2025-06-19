@@ -13,4 +13,7 @@ router.get("/reservList", controller.getReservList);
 //구매하기
 router.post("/reservPurchase", controller.postReservPurchase);
 
+//마이페이지 정보
+router.get("/mypageInfo", controller.getMypageInfo);
+
 module.exports = router;

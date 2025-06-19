@@ -19,4 +19,7 @@ router.get("/checkSession", controller.checkSession);
 router.post("/alarm", controller.checkAlarm);
 router.get("/alarmStatus", controller.getCheckAlarm);
 
+//마이페이지 유저정보
+router.get("/mypageInfo", controller.getMypageInfo);
+
 module.exports = router;
