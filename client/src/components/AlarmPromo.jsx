@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import api from "../js/api";
-import "./css/AlarmPromo.css";
+import "./css/AlarmPromo.css"; // 스타일 분리
 
 const AlarmPromo = () => {
    const { isLoggedIn, currentAlarm, setAlarm } = useContext(AuthContext);
@@ -29,12 +29,15 @@ const AlarmPromo = () => {
 
    return (
       <div className="alarm-promo">
-         <p className="promo-text">
-            새로운 굿즈 출시 알림을 카카오톡으로 받아보세요!
-         </p>
-         <button className="promo-btn" onClick={handleClick}>
-            {currentAlarm ? "알림 끄기" : "알림받기"}
-         </button>
+         <div className="alarm-promo-overlay">
+            <h1>Good-Ping</h1>
+            <p className="promo-text">
+               새로운 굿즈 출시 알림을 카카오톡으로 받아보세요!
+            </p>
+            <button className="promo-btn" onClick={handleClick}>
+               {currentAlarm ? "알림 끄기" : "알림받기"}
+            </button>
+         </div>
       </div>
    );
 };
