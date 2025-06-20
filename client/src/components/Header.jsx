@@ -13,6 +13,41 @@ const sliderImages = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8];
 
 function Header() {
    const [currentIndex, setCurrentIndex] = useState(0);
+   const [startX, setStartX] = useState(null);
+
+   const handleMouseDown = (e) => {
+      setStartX(e.clientX);
+   };
+
+   const handleMouseUp = (e) => {
+      if (startX === null) return;
+      const delta = e.clientX - startX;
+      if (delta > 50) {
+         setCurrentIndex(
+            (prev) => (prev - 1 + sliderImages.length) % sliderImages.length
+         );
+      } else if (delta < -50) {
+         setCurrentIndex((prev) => (prev + 1) % sliderImages.length);
+      }
+      setStartX(null);
+   };
+
+   const handleTouchStart = (e) => {
+      setStartX(e.touches[0].clientX);
+   };
+
+   const handleTouchEnd = (e) => {
+      if (startX === null) return;
+      const delta = e.changedTouches[0].clientX - startX;
+      if (delta > 50) {
+         setCurrentIndex(
+            (prev) => (prev - 1 + sliderImages.length) % sliderImages.length
+         );
+      } else if (delta < -50) {
+         setCurrentIndex((prev) => (prev + 1) % sliderImages.length);
+      }
+      setStartX(null);
+   };
 
    useEffect(() => {
       const interval = setInterval(() => {
@@ -26,6 +61,10 @@ function Header() {
          <div
             className="slides"
             style={{ transform: `translateX(-${currentIndex * 100}vw)` }}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
          >
             {sliderImages.map((img, i) => (
                <div
