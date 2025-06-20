@@ -9,12 +9,6 @@
    font-size: 2rem;
    font-weight: bold;
    text-align: center;
-   margin-bottom: 1rem;
-}
-
-.all-products-search {
-   display: flex;
-   justify-content: center;
    margin-bottom: 25px;
 }
 
@@ -37,6 +31,12 @@
    .all-products-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
+   }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+   .all-products-grid {
+      grid-template-columns: repeat(3, 1fr);
    }
 }
 

@@ -1,4 +1,4 @@
-const userModel = require("../model/user");
+const userModel = require("../model/User");
 const nodemailer = require("nodemailer");
 const axios = require("axios");
 require("dotenv").config();

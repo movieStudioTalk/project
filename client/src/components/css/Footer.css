@@ -28,7 +28,7 @@
 }
 
 /* ✅ 데스크탑(PC) 이상일 때 스타일 변화 */
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
    .footer-container {
       flex-direction: row;
       justify-content: center;
