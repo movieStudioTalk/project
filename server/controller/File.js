@@ -1,4 +1,4 @@
-const fileModel = require("../model/file");
+const fileModel = require("../model/File");
 const path = require("path");
 const fs = require("fs");
 const crypto = require("crypto");
