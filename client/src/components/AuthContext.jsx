@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }) => {
   const fetchAlarmStatus = async () => {
     try {
       const res = await api.get("/user/alarmStatus");
-      console.log(res);
       setAlarm(res.data.isSuccess);
     } catch (err) {
       console.error("알림 상태 로드 실패:", err);

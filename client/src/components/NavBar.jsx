@@ -93,6 +93,7 @@ const NavBar = () => {
   const locationMypage = () => {
     navigate("/mypage");
   };
+
   return (
     <nav className={`navbar ${isScrolled ? "solid" : ""}`}>
       <div className="navbar__logo">
