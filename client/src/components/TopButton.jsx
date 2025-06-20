@@ -30,6 +30,7 @@ function TopButton({
    const scrollToAllProducts = () => {
       const target =
          document.getElementById("allProducts") ||
+         document.getElementById("new") ||
          document.getElementById("popular");
       const header = document.querySelector("header");
       const navBar = document.querySelector("nav");
