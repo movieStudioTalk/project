@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Header from "./components/Header";
 import Section from "./components/Section";
+import AlarmPromo from "./components/AlarmPromo";
 import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
 import TopButton from "./components/TopButton";
@@ -51,6 +52,8 @@ function App() {
                            <div className="feature-card">💳 간편 결제</div>
                         </section>
                         {/* ✅ 추가된 꾸미기 영역 끝 */}
+
+                        <AlarmPromo />
 
                         <div id="contents">
                            {showAll ? (

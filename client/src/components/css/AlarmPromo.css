@@ -1,0 +1,28 @@
+.alarm-promo {
+   max-width: 1200px;
+   margin: 40px auto;
+   padding: 20px;
+   text-align: center;
+   background-color: #fff3f4;
+   border-radius: 12px;
+   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.promo-text {
+   margin-bottom: 12px;
+   font-size: 1.1rem;
+}
+
+.promo-btn {
+   padding: 8px 16px;
+   border: none;
+   background-color: #ff7083;
+   color: white;
+   border-radius: 20px;
+   font-size: 1rem;
+   cursor: pointer;
+}
+
+.promo-btn:hover {
+   background-color: #ff5a70;
+}
